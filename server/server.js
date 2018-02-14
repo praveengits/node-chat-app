@@ -19,16 +19,27 @@ io.on('connection',(socket) => {
 
 io.on('connection',(socket) => {
     console.log('New user connected!');
+
+    socket.emit('newMessage', {
+        from: 'sindy',
+        text: 'Hello',
+        createdAt: new Date().getTime().toString()
+    });
+
+    socket.on('createMessage', (newMsg) => {
+        console.log('createEmail', newMsg);    
+        
+        io.emit('newMessage', {
+            from: newMsg.from,
+            text: newMsg.text,
+            createdAt: new Date().getTime().toString()    
+        });    
+    });
     
     socket.on('disconnect', (socket)=> {
         console.log('Disconnected from the user');                
     });
 });
-
-
-// app.get('/', (req, res) => {
-//     res.render('index.html');
-// });
 
 server.listen(port, () => {
     console.log(`App listening on port ${port}!`);
