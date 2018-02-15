@@ -28,11 +28,13 @@ io.on('connection',(socket) => {
         generateMessage('Admin', 'A new user has joined!'));
 
 
-    socket.on('createMessage', (newMsg) => {        
+    socket.on('createMessage', (newMsg, callback) => {        
+        console.log('Create Message : ', newMsg);
         
         io.emit('newMessage',
             generateMessage(newMsg.from, newMsg.text)); 
         
+        callback('Acknowledged from admin!');
         // socket.broadcast.emit('newMessage', {
         //     from: newMsg.from,
         //     text: newMsg.text,

@@ -15,4 +15,29 @@ socket.on('disconnect', function() {
 
 socket.on('newMessage', function(msg) {
     console.log('welcome !!', msg);
+
+    var li = jQuery('<li class="list-group-item"></li>');
+    li.text(`${msg.from}: ${msg.text}`);
+  
+    jQuery('#messages-list').append(li);
 });
+
+socket.emit('createMessage', {
+        from: 'Christo',
+        text: 'Hi da!'
+    }, function(ack){
+        console.log('Ack: ', ack);        
+    }
+);
+
+jQuery('#message-form').on('submit', function (e) {
+    e.preventDefault();
+  
+    socket.emit('createMessage', {
+      from: 'User',
+      text: jQuery('[name=message]').val()
+    }, function () {
+  
+    });
+  });
+
