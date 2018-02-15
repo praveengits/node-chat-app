@@ -22,14 +22,6 @@ socket.on('newMessage', function(msg) {
     jQuery('#messages-list').append(li);
 });
 
-socket.emit('createMessage', {
-        from: 'Christo',
-        text: 'Hi da!'
-    }, function(ack){
-        console.log('Ack: ', ack);        
-    }
-);
-
 jQuery('#message-form').on('submit', function (e) {
     e.preventDefault();
   
