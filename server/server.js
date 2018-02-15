@@ -32,14 +32,8 @@ io.on('connection',(socket) => {
         console.log('Create Message : ', newMsg);
         
         io.emit('newMessage',
-            generateMessage(newMsg.from, newMsg.text)); 
-        
-        callback('Acknowledged from admin!');
-        // socket.broadcast.emit('newMessage', {
-        //     from: newMsg.from,
-        //     text: newMsg.text,
-        //     createdAt: new Date().getTime().toString()    
-        // });        
+            generateMessage(newMsg.from, newMsg.text));         
+        callback('Acknowledged from admin!');    
     });
     
     socket.on('disconnect', (socket)=> {
